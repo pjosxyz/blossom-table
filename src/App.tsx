@@ -1,4 +1,3 @@
-import "./App.css";
 import BaseLayout from "@/components/layout/base-layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import ServerTable from "@/components/tables/server-table";
