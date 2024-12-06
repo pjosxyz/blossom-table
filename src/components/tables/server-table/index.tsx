@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DEFAULT_ITEMS_PER_PAGE, MAX_REVIEWER_USERNAMES } from "@/consts";
-import { Copy, SlidersHorizontal } from "lucide-react";
+import { Copy, SlidersHorizontal, SquareArrowOutUpRight } from "lucide-react";
 import React, { PropsWithChildren } from "react";
 import mData from "@/data/MOCK_DATA.json";
 import { Star } from "lucide-react";
@@ -80,43 +80,51 @@ function MobileRow() {
           <StarRating />1 review
         </div>
       </header>
-      <div className="flex-col gap-4 px-4">
-        <p className=" text-slate-400">Reviewed by:</p>
-        <div className="flex gap-1 flex-wrap text-slate-950">
-          {DUMMY_ROW_DATA.reviewedBy.map((reviewer, i) => {
-            // stop rendering new items if max items already rendered
-            if (i > MAX_REVIEWER_USERNAMES) return null;
-
-            return (
-              <>
-                {i === MAX_REVIEWER_USERNAMES ? (
-                  <p className="text-slate-500" key={reviewer.id}>
-                    and{" "}
-                    {DUMMY_ROW_DATA.reviewedBy.length - MAX_REVIEWER_USERNAMES}{" "}
-                    more...
-                  </p>
-                ) : (
-                  <a
-                    key={reviewer.id}
-                    href={`https://primal.net/p/npub` + reviewer.address}
-                    className="text-slate-950"
-                  >
-                    {reviewer.username}
-                    {i + 1 === DUMMY_ROW_DATA.reviewedBy.length ? "" : ","}
-                  </a>
-                )}
-              </>
-            );
-          })}
+    
+      <div className="grid grid-cols-[2.5fr_1fr]">
+        <div className="flex flex-col gap-2 py-4">
+          <div className="flex flex-col gap-1 px-4">
+            <p className=" text-slate-400">Reviewed by:</p>
+            <div className="flex gap-1 flex-wrap text-slate-950">
+              {DUMMY_ROW_DATA.reviewedBy.map((reviewer, i) => {
+                // stop rendering new items if max items already rendered
+                if (i > MAX_REVIEWER_USERNAMES) return null;
+                return (
+                  <>
+                    {i === MAX_REVIEWER_USERNAMES ? (
+                      <p className="text-slate-500" key={reviewer.id}>
+                        and{" "}
+                        {DUMMY_ROW_DATA.reviewedBy.length - MAX_REVIEWER_USERNAMES}{" "}
+                        more...
+                      </p>
+                    ) : (
+                      <a
+                        key={reviewer.id}
+                        href={`https://primal.net/p/npub` + reviewer.address}
+                        className="text-slate-950"
+                      >
+                        {reviewer.username}
+                        {i + 1 === DUMMY_ROW_DATA.reviewedBy.length ? "" : ","}
+                      </a>
+                    )}
+                  </>
+                );
+              })}
+            </div>
+          </div>
+          <div className="flex flex-col gap-1 px-4">
+            <p className=" text-slate-400">Description:</p>
+            <p className="text-slate-950">{DUMMY_ROW_DATA.description}</p>
+          </div>
+          <div className="flex justify-between items-center px-4">
+            <p className=" text-slate-400">URL:</p>
+            <Button variant="tertiary" size="sm">{DUMMY_ROW_DATA.url} <Copy size={10} /></Button>
+          </div>
         </div>
+      <div className="border-l flex-col content-center items-center gap-4 border-slate-200">
+        <Button variant="link">Open <SquareArrowOutUpRight /></Button>
+        <Button>Add review</Button>
       </div>
-      <div className="flex-col gap-4 px-4">
-        <p className=" text-slate-400">Description:</p>
-        <p className="text-slate-950">{DUMMY_ROW_DATA.description}</p>
-      </div>
-      <div className="flex justify-between items-center px-4">
-        <p className=" text-slate-400">URL:</p>
-        <Button variant="tertiary" size="sm">{DUMMY_ROW_DATA.url} <Copy /></Button>
       </div>
     </div>
   );
