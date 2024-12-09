@@ -18,59 +18,45 @@ import {
 import { DEFAULT_ITEMS_PER_PAGE, MAX_REVIEWER_USERNAMES } from "@/consts";
 import { Copy, SlidersHorizontal, SquareArrowOutUpRight } from "lucide-react";
 import React, { PropsWithChildren } from "react";
-import mData from "@/data/MOCK_DATA.json";
+
 import { Star } from "lucide-react";
 import {
   ColumnDef,
   getCoreRowModel,
   getPaginationRowModel,
+  Table,
   useReactTable,
 } from "@tanstack/react-table";
+import type { ServerData } from "@/types";
 
-interface ServerData {
-  id: number;
-  serverName: string;
-  rating: number;
-  reviewedBy: {
-    id: number;
-    username: string;
-    address: string;
-  }[];
-  description: string;
-  url: string;
-}
-
-export default function ServersTable() {
-  const data = React.useMemo(() => mData, []);
+// interface ServerData {
+//   id: number;
+//   serverName: string;
+//   rating: number;
+//   reviewedBy: {
+//     id: number;
+//     username: string;
+//     address: string;
+//   }[];
+//   description: string;
+//   url: string;
+// }
+type ServersTableProps = {
+  data: ServerData[];
+  columns: ColumnDef<ServerData>[];
+};
+export default function ServersTable({ data, columns }: ServersTableProps) {
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+  });
 
   const [serverNameFilter, setServerNameFilter] = React.useState<string>("");
   const [itemsPerPage, setItemsPerPage] = React.useState<number>(
     DEFAULT_ITEMS_PER_PAGE
   );
-
-  // TODO: need to memoise...
-  const columns: ColumnDef<ServerData>[] = [
-    {
-      accessorKey: "serverName",
-      header: "Server Name",
-    },
-    {
-      accessorKey: "rating",
-      header: "Rating",
-    },
-    {
-      accessorKey: "reviewedBy",
-      header: "Reviewed by",
-    },
-    {
-      accessorKey: "description",
-      header: "Description",
-    },
-    {
-      accessorKey: "url",
-      header: "URL",
-    },
-  ];
 
   function handleServerNameFilterChange(value: string) {
     console.log("handling search change");
@@ -85,8 +71,7 @@ export default function ServersTable() {
     // TODO: move to wrap tabs too in App
     <div className="flex flex-col h-[90dvh] gap-4">
       <MobileTable
-        data={data}
-        columns={columns}
+        tableData={table}
         serverNameFilter={serverNameFilter}
         onServerNameFilterChange={handleServerNameFilterChange}
       />
@@ -94,6 +79,7 @@ export default function ServersTable() {
         <h1>I'm not a mobile screen</h1>
       </div>
       <Pagination
+        tableData={table}
         itemsPerPage={itemsPerPage}
         onItemsPerPageChange={handleItemsPerPageChange}
       />
@@ -102,8 +88,7 @@ export default function ServersTable() {
 }
 
 type MobileTableProps = {
-  data: ServerData[];
-  columns: ColumnDef<ServerData>[];
+  tableData: Table<ServerData>;
   serverNameFilter: string;
   onServerNameFilterChange: (value: string) => void;
   // itemsPerPage: number;
@@ -111,18 +96,11 @@ type MobileTableProps = {
 };
 
 function MobileTable({
-  data,
-  columns,
+  tableData,
   serverNameFilter,
   onServerNameFilterChange,
 }: MobileTableProps) {
-  const table = useReactTable({
-    data,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-  });
-  const rowData = table.getRowModel().rows.map((row) => row.original);
+  const rowData = tableData.getRowModel().rows.map((row) => row.original);
 
   return (
     <>
@@ -133,7 +111,7 @@ function MobileTable({
         >
           {/* drawer content here */}
         </MobileFilters>
-        <div className=" gap-2 flex flex-col bg-slate-300 p-2 rounded-lg flex-1 overflow-y-auto">
+        <div className=" gap-2 flex flex-col bg-slate-100 border-t border-b border-slate-300 p-2 flex-1 overflow-y-auto">
           {rowData.map((row) => {
             return (
               <MobileRow
@@ -152,7 +130,7 @@ function MobileTable({
   );
 }
 
-type MobileRowProps = Omit<ServerData, "id">;
+type MobileRowProps = Omit<ServerData, "id"> & { key: number };
 
 function MobileRow({
   serverName,
@@ -162,21 +140,21 @@ function MobileRow({
   url,
 }: MobileRowProps) {
   return (
-    <div className="text-sm border bg-white shadow-sm rounded-md shrink-0 overflow-hidden">
-      <header className="bg-slate-100 px-4 py-3 border-b  border-slate-300 flex items-center justify-between">
+    <article className="text-sm border border-slate-300 bg-white shadow-sm rounded-md shrink-0 overflow-hidden">
+      <header className=" px-3 py-3 border-b  border-slate-200 flex items-center justify-between">
         <p className="capitalize text-lg max-w-[60%] leading-tight font-medium text-slate-950">
           {serverName}
         </p>
-        <div className="text-xs flex flex-col items-center gap-1 text-slate-500">
+        <div className="text-xs flex items-center gap-1 text-slate-500">
           <StarRating serverRating={rating} />1 review{" "}
           {/* TODO: Derive from relay data, update ServerData interface */}
         </div>
       </header>
 
-      <div className="grid grid-cols-[2.5fr_1fr]">
-        <div className="flex flex-col gap-3 py-4">
-          <div className="flex flex-col gap-1 px-4">
-            <p className=" text-slate-400">Reviewed by:</p>
+      <div className="">
+        <div className="flex flex-col">
+          <div className="flex flex-col border-b border-slate-00 gap-2 p-3">
+            <p className=" text-slate-400 text-xs">Reviewed by</p>
             <div className="flex gap-1 flex-wrap text-slate-950">
               {reviewedBy.map((reviewer, i) => {
                 // stop rendering new items if max items already rendered
@@ -203,27 +181,98 @@ function MobileRow({
               })}
             </div>
           </div>
-          <div className="flex flex-col gap-1 px-4">
-            <p className=" text-slate-400">Description:</p>
+          <div className="flex flex-col gap-2 p-3 border-b border-slate-00">
+            <p className="text-xs text-slate-400">Description</p>
             <p className="text-slate-950">{description}</p>
           </div>
-          <div className="flex flex-col gap-1 px-4">
-            <p className=" text-slate-400">URL:</p>
-            <span className="flex items-center gap-1">
-              {url} <Copy size={10} />
-            </span>
+          <div className="flex flex-col gap-2 p-3 border-b border-slate-00">
+            <p className="text-xs text-slate-400">URL</p>
+            <Button variant="outline" size="sm" className="self-start">
+              {url} <Copy size={16} />
+            </Button>
           </div>
         </div>
-        <div className="border-l flex flex-col px-4 justify-center items-center gap-4 border-slate-200">
-          <Button variant="link">
-            Open <SquareArrowOutUpRight />
-          </Button>
-          <Button>Add review</Button>
-        </div>
       </div>
-    </div>
+      <div className="border-l flex p-2 justify-center items-center gap-4 border-slate-200">
+        <Button variant="link">
+          Open <SquareArrowOutUpRight />
+        </Button>
+        <Button>Add review</Button>
+      </div>
+    </article>
   );
 }
+/* MobileRow v1 */
+// function MobileRow({
+//   serverName,
+//   rating,
+//   reviewedBy,
+//   description,
+//   url,
+// }: MobileRowProps) {
+//   return (
+//     <article className="text-sm border border-slate-300 bg-white shadow-sm rounded-md shrink-0 overflow-hidden">
+//       <header className=" px-3 py-3 border-b  border-slate-300 flex items-center justify-between">
+//         <p className="capitalize text-lg max-w-[60%] leading-tight font-medium text-slate-950">
+//           {serverName}
+//         </p>
+//         <div className="text-xs flex flex-col items-center gap-1 text-slate-500">
+//           <StarRating serverRating={rating} />1 review{" "}
+//           {/* TODO: Derive from relay data, update ServerData interface */}
+//         </div>
+//       </header>
+
+//       <div className="grid grid-cols-[2.5fr_1fr] ">
+//         <div className="flex flex-col">
+//           <div className="flex flex-col border-b border-slate-200 gap-1 p-3">
+//             <p className=" text-slate-400 text-xs">Reviewed by:</p>
+//             <div className="flex gap-1 flex-wrap text-slate-950">
+//               {reviewedBy.map((reviewer, i) => {
+//                 // stop rendering new items if max items already rendered
+//                 if (i > MAX_REVIEWER_USERNAMES) return null;
+//                 return (
+//                   <>
+//                     {i ===
+//                     MAX_REVIEWER_USERNAMES /* TODO: make this a popover or link to full reviews view? */ ? (
+//                       <p className="text-slate-500" key={reviewer.id}>
+//                         and {reviewedBy.length - MAX_REVIEWER_USERNAMES} more...
+//                       </p>
+//                     ) : (
+//                       <a
+//                         key={reviewer.id}
+//                         href={`https://primal.net/p/npub` + reviewer.address}
+//                         className="text-slate-950 visited:text-slate-500 underline"
+//                       >
+//                         {reviewer.username}
+//                         {i + 1 === reviewedBy.length ? "" : ","}
+//                       </a>
+//                     )}
+//                   </>
+//                 );
+//               })}
+//             </div>
+//           </div>
+//           <div className="flex flex-col gap-1 p-3 border-b border-slate-200">
+//             <p className="text-xs text-slate-400">Description:</p>
+//             <p className="text-slate-950">{description}</p>
+//           </div>
+//           <div className="flex flex-col gap-1 p-3 border-b border-slate-200">
+//             <p className=" text-slate-400">URL:</p>
+//             <span className="flex items-center gap-1">
+//               {url} <Copy size={16} />
+//             </span>
+//           </div>
+//         </div>
+//         <div className="border-l bg-slate-50 flex flex-col px-4 justify-center items-center gap-4 border-slate-200">
+//           <Button variant="link">
+//             Open <SquareArrowOutUpRight />
+//           </Button>
+//           <Button>Add review</Button>
+//         </div>
+//       </div>
+//     </article>
+//   );
+// }
 
 function StarRating({ serverRating }: { serverRating: number }) {
   const rating = Math.round(serverRating);
@@ -246,13 +295,14 @@ function StarRating({ serverRating }: { serverRating: number }) {
 }
 
 type PaginationProps = {
+  tableData: Table<ServerData>;
   itemsPerPage: number;
   onItemsPerPageChange: (value: string) => void;
 };
 
-function Pagination({ itemsPerPage, onItemsPerPageChange }: PaginationProps) {
+function Pagination({ tableData, itemsPerPage, onItemsPerPageChange }: PaginationProps) {
   return (
-    <div className="flex justify-between flex-end">
+    <div className="flex justify-between flex-end px-2">
       <div className="flex items-center">
         <p className="text-sm grow-1 whitespace-nowrap hidden sm:block">
           Items per page:
@@ -269,8 +319,22 @@ function Pagination({ itemsPerPage, onItemsPerPageChange }: PaginationProps) {
         </Select>
       </div>
       <div className="flex gap-1">
-        <Button>Previous</Button>
-        <Button>Next</Button>
+        <Button onClick={() => tableData.setPageIndex(0)}>First</Button>
+        <Button
+          onClick={() => tableData.previousPage()}
+          disabled={!tableData.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          onClick={() => tableData.nextPage()}
+          disabled={!tableData.getCanNextPage()}
+        >
+          Next
+        </Button>
+        <Button onClick={() => tableData.setPageIndex(tableData.getPageCount() - 1)}>
+          Last
+        </Button>
       </div>
     </div>
   );
@@ -287,7 +351,7 @@ function MobileFilters({
   children,
 }: PropsWithChildren<FiltersType>) {
   return (
-    <div className="flex justify-between gap-9">
+    <div className="flex justify-between px-2 gap-9">
       <ServerNameSearch
         serverNameFilter={serverNameFilter}
         onSearchChange={onSearchChange}
