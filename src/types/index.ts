@@ -2,11 +2,13 @@ export type ServerData = {
   id: number;
   serverName: string;
   rating: number;
-  reviewedBy: {
-    id: number;
-    username: string;
-    address: string;
-  }[];
+  reviewedBy: ReviewedBy[];
   description: string;
   url: string;
+};
+
+export type ReviewedBy = {
+  id: number;
+  username: string;
+  address: string;
 };
