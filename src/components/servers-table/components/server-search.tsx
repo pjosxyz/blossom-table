@@ -11,6 +11,7 @@ export default function ServerNameSearch({
       className="max-w-96 border border-slate-300"
       value={serverNameFilter}
       onChange={(e) => onSearchChange(e.target.value)}
+      // onChange={(e) => console.log(e.target.value)}
     />
   );
 }

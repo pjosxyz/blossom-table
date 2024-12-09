@@ -13,36 +13,41 @@ function App() {
   const data = React.useMemo(() => mData, []);
 
   // TODO: need to memoise...
-  const columns: ColumnDef<ServerData>[] = [
-    {
-      accessorKey: "serverName",
-      header: "Server Name",
-    },
-    {
-      accessorKey: "rating",
-      header: "Rating",
-      cell: (info) => <StarRating serverRating={info.getValue<number>()} />,
-    },
-    {
-      accessorKey: "reviewedBy",
-      header: "Reviewed by",
-      cell: (info) => <Reviewers reviewedBy={info.getValue<ReviewedBy[]>()} />,
-    },
-    {
-      accessorKey: "description",
-      header: "Description",
-    },
-    {
-      accessorKey: "url",
-      header: "URL",
-      cell: (info) => <CopyURLButton url={info.getValue<string>()} />,
-    },
-    {
-      accessorKey: "actions",
-      header: "Actions",
-      cell: () => <ActionButtons />,
-    },
-  ];
+  const columns = React.useMemo<ColumnDef<ServerData>[]>(
+    () => [
+      {
+        accessorKey: "serverName",
+        header: "Server Name",
+      },
+      {
+        accessorKey: "rating",
+        header: "Rating",
+        cell: (info) => <StarRating serverRating={info.getValue<number>()} />,
+      },
+      {
+        accessorKey: "reviewedBy",
+        header: "Reviewed by",
+        cell: (info) => (
+          <Reviewers reviewedBy={info.getValue<ReviewedBy[]>()} />
+        ),
+      },
+      {
+        accessorKey: "description",
+        header: "Description",
+      },
+      {
+        accessorKey: "url",
+        header: "URL",
+        cell: (info) => <CopyURLButton url={info.getValue<string>()} />,
+      },
+      {
+        accessorKey: "actions",
+        header: "Actions",
+        cell: () => <ActionButtons />,
+      },
+    ],
+    [] // No dependencies since columns definition is static
+  );
   return (
     <BaseLayout>
       <Tabs defaultValue="servers" className="w-full">

@@ -19,7 +19,7 @@ export default function DesktopTable({
 }: TableProps) {
   return (
     <div className="hidden lg:block">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mb-4">
         <ServerNameSearch
           onSearchChange={onServerNameFilterChange}
           serverNameFilter={serverNameFilter}
@@ -37,6 +37,7 @@ export default function DesktopTable({
                     // first cell doesn't get a border-left
                     className={index > 0 ? "border-l border-slate-300" : ""}
                   >
+                    {/* TableHead children typed as React.Node so wrapped in fragment to keep TS happy */}
                     <>{headers.column.columnDef.header}</>
                   </TableHead>
                 ))}
@@ -49,15 +50,14 @@ export default function DesktopTable({
                 {row.getVisibleCells().map((cell, index) => (
                   <TableCell
                     key={cell.id}
-                    className={
-                      cell.column.columnDef.header === "Actions"
-                        ? "border-l border-slate-300 flex flex-col gap-3"
-                        : index > 0
-                        ? "border-l border-slate-300"
-                        : ""
-                    }
+                    className={index > 0 ? "border-l border-slate-300" : ""}
                   >
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                    <div className="flex flex-col gap-3">
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </div>
                   </TableCell>
                 ))}
               </TableRow>
