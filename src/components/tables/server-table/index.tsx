@@ -82,7 +82,8 @@ export default function ServersTable() {
   }
 
   return (
-    <div className="flex flex-col h-[90dvh] bg-blue-300 gap-4">
+    // TODO: move to wrap tabs too in App
+    <div className="flex flex-col h-[90dvh] gap-4">
       <MobileTable
         data={data}
         columns={columns}
@@ -132,7 +133,7 @@ function MobileTable({
         >
           {/* drawer content here */}
         </MobileFilters>
-        <div className="bg-white rounded-lg border flex-1 border-slate-200 overflow-y-auto">
+        <div className=" gap-2 flex flex-col bg-slate-300 p-2 rounded-lg flex-1 overflow-y-auto">
           {rowData.map((row) => {
             return (
               <MobileRow
@@ -161,8 +162,8 @@ function MobileRow({
   url,
 }: MobileRowProps) {
   return (
-    <div className="text-sm">
-      <header className="bg-slate-50 px-4 py-3 border-b border-t border-slate-200 flex items-center justify-between">
+    <div className="text-sm border bg-white shadow-sm rounded-md shrink-0 overflow-hidden">
+      <header className="bg-slate-100 px-4 py-3 border-b  border-slate-300 flex items-center justify-between">
         <p className="capitalize text-lg max-w-[60%] leading-tight font-medium text-slate-950">
           {serverName}
         </p>
