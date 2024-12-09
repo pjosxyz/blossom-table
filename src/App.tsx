@@ -1,6 +1,6 @@
 import BaseLayout from "@/components/layout/base-layout";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import ServerTable from "@/components/tables/server-table";
+import ServersTable from "@/components/tables/server-table";
 
 function App() {
   return (
@@ -11,11 +11,9 @@ function App() {
           <TabsTrigger value="reviews">Reviews</TabsTrigger>
         </TabsList>
         <TabsContent value="servers">
-          <ServerTable />
+          <ServersTable />
         </TabsContent>
-        <TabsContent value="reviews">
-          List of reviews in a table
-        </TabsContent>
+        <TabsContent value="reviews">List of reviews in a table</TabsContent>
       </Tabs>
     </BaseLayout>
   );

@@ -20,12 +20,57 @@ import { Copy, SlidersHorizontal, SquareArrowOutUpRight } from "lucide-react";
 import React, { PropsWithChildren } from "react";
 import mData from "@/data/MOCK_DATA.json";
 import { Star } from "lucide-react";
+import {
+  ColumnDef,
+  getCoreRowModel,
+  getPaginationRowModel,
+  useReactTable,
+} from "@tanstack/react-table";
 
-export default function ServerTable() {
+interface ServerData {
+  id: number;
+  serverName: string;
+  rating: number;
+  reviewedBy: {
+    id: number;
+    username: string;
+    address: string;
+  }[];
+  description: string;
+  url: string;
+}
+
+export default function ServersTable() {
+  const data = React.useMemo(() => mData, []);
+
   const [serverNameFilter, setServerNameFilter] = React.useState<string>("");
   const [itemsPerPage, setItemsPerPage] = React.useState<number>(
     DEFAULT_ITEMS_PER_PAGE
   );
+
+  // TODO: need to memoise...
+  const columns: ColumnDef<ServerData>[] = [
+    {
+      accessorKey: "serverName",
+      header: "Server Name",
+    },
+    {
+      accessorKey: "rating",
+      header: "Rating",
+    },
+    {
+      accessorKey: "reviewedBy",
+      header: "Reviewed by",
+    },
+    {
+      accessorKey: "description",
+      header: "Description",
+    },
+    {
+      accessorKey: "url",
+      header: "URL",
+    },
+  ];
 
   function handleServerNameFilterChange(value: string) {
     console.log("handling search change");
@@ -37,75 +82,119 @@ export default function ServerTable() {
   }
 
   return (
+    <div className="flex flex-col h-[90dvh] bg-blue-300 gap-4">
+      <MobileTable
+        data={data}
+        columns={columns}
+        serverNameFilter={serverNameFilter}
+        onServerNameFilterChange={handleServerNameFilterChange}
+      />
+      <div className="hidden md:block">
+        <h1>I'm not a mobile screen</h1>
+      </div>
+      <Pagination
+        itemsPerPage={itemsPerPage}
+        onItemsPerPageChange={handleItemsPerPageChange}
+      />
+    </div>
+  );
+}
+
+type MobileTableProps = {
+  data: ServerData[];
+  columns: ColumnDef<ServerData>[];
+  serverNameFilter: string;
+  onServerNameFilterChange: (value: string) => void;
+  // itemsPerPage: number;
+  // onItemsPerPageChange: (value: string) => void; // value coming from input so is a string...
+};
+
+function MobileTable({
+  data,
+  columns,
+  serverNameFilter,
+  onServerNameFilterChange,
+}: MobileTableProps) {
+  const table = useReactTable({
+    data,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+  });
+  const rowData = table.getRowModel().rows.map((row) => row.original);
+
+  return (
     <>
-      <div className="md:hidden">
+      <div className="md:hidden flex flex-col h-[80%]  gap-4">
         <MobileFilters
           serverNameFilter={serverNameFilter}
-          onSearchChange={handleServerNameFilterChange}
+          onSearchChange={onServerNameFilterChange}
         >
           {/* drawer content here */}
         </MobileFilters>
-        {/* mobile table (actually a grid) */}
-        <MobileTable />
-        <Pagination
-          itemsPerPage={itemsPerPage}
-          onItemsPerPageChange={handleItemsPerPageChange}
-        />
-      </div>
-      <div className="hidden md:block">
-        <h1>I'm not a mobile screen</h1>
+        <div className="bg-white rounded-lg border flex-1 border-slate-200 overflow-y-auto">
+          {rowData.map((row) => {
+            return (
+              <MobileRow
+                key={row.id}
+                serverName={row.serverName}
+                rating={row.rating}
+                reviewedBy={row.reviewedBy}
+                description={row.description}
+                url={row.url}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );
 }
 
-const DUMMY_ROW_DATA = mData[1];
+type MobileRowProps = Omit<ServerData, "id">;
 
-function MobileTable() {
-  return (
-    <div className="bg-white rounded-lg border border-slate-200 overflow-hidden">
-      <MobileRow />
-    </div>
-  );
-}
-
-function MobileRow() {
+function MobileRow({
+  serverName,
+  rating,
+  reviewedBy,
+  description,
+  url,
+}: MobileRowProps) {
   return (
     <div className="text-sm">
-      <header className="bg-slate-50 px-4 py-2 border-b border-slate-200 flex items-center justify-between">
-        <p className="capitalize text-sm font-semibold text-slate-950">
-          {DUMMY_ROW_DATA.serverName}
+      <header className="bg-slate-50 px-4 py-3 border-b border-t border-slate-200 flex items-center justify-between">
+        <p className="capitalize text-lg max-w-[60%] leading-tight font-medium text-slate-950">
+          {serverName}
         </p>
-        <div className="text-xs flex items-center gap-1 text-slate-500">
-          <StarRating />1 review
+        <div className="text-xs flex flex-col items-center gap-1 text-slate-500">
+          <StarRating serverRating={rating} />1 review{" "}
+          {/* TODO: Derive from relay data, update ServerData interface */}
         </div>
       </header>
 
       <div className="grid grid-cols-[2.5fr_1fr]">
-        <div className="flex flex-col gap-2 py-4">
+        <div className="flex flex-col gap-3 py-4">
           <div className="flex flex-col gap-1 px-4">
             <p className=" text-slate-400">Reviewed by:</p>
             <div className="flex gap-1 flex-wrap text-slate-950">
-              {DUMMY_ROW_DATA.reviewedBy.map((reviewer, i) => {
+              {reviewedBy.map((reviewer, i) => {
                 // stop rendering new items if max items already rendered
                 if (i > MAX_REVIEWER_USERNAMES) return null;
                 return (
                   <>
-                    {i === MAX_REVIEWER_USERNAMES ? (
+                    {i ===
+                    MAX_REVIEWER_USERNAMES /* TODO: make this a popover or link to full reviews view? */ ? (
                       <p className="text-slate-500" key={reviewer.id}>
-                        and{" "}
-                        {DUMMY_ROW_DATA.reviewedBy.length -
-                          MAX_REVIEWER_USERNAMES}{" "}
-                        more...
+                        and {reviewedBy.length - MAX_REVIEWER_USERNAMES} more...
                       </p>
                     ) : (
                       <a
                         key={reviewer.id}
                         href={`https://primal.net/p/npub` + reviewer.address}
-                        className="text-slate-950"
+                        className="text-slate-950 visited:text-slate-500 underline"
                       >
                         {reviewer.username}
-                        {i + 1 === DUMMY_ROW_DATA.reviewedBy.length ? "" : ","}
+                        {i + 1 === reviewedBy.length ? "" : ","}
                       </a>
                     )}
                   </>
@@ -115,16 +204,16 @@ function MobileRow() {
           </div>
           <div className="flex flex-col gap-1 px-4">
             <p className=" text-slate-400">Description:</p>
-            <p className="text-slate-950">{DUMMY_ROW_DATA.description}</p>
+            <p className="text-slate-950">{description}</p>
           </div>
-          <div className="flex justify-between items-center px-4">
+          <div className="flex flex-col gap-1 px-4">
             <p className=" text-slate-400">URL:</p>
-            <Button variant="tertiary" size="sm">
-              {DUMMY_ROW_DATA.url} <Copy size={10} />
-            </Button>
+            <span className="flex items-center gap-1">
+              {url} <Copy size={10} />
+            </span>
           </div>
         </div>
-        <div className="border-l flex-col content-center items-center gap-4 border-slate-200">
+        <div className="border-l flex flex-col px-4 justify-center items-center gap-4 border-slate-200">
           <Button variant="link">
             Open <SquareArrowOutUpRight />
           </Button>
@@ -135,16 +224,20 @@ function MobileRow() {
   );
 }
 
-function StarRating() {
-  const rating = Math.round(DUMMY_ROW_DATA.rating);
+function StarRating({ serverRating }: { serverRating: number }) {
+  const rating = Math.round(serverRating);
   return (
     <div className="flex">
       {[...Array(5)].map((_, index) => (
         <Star
           key={index}
           size={16}
-          fill={index < rating ? "gold" : "none"}
-          color={index < rating ? "gold" : "gray"}
+          className={
+            index < rating
+              ? "fill-amber-500 stroke-none"
+              : " fill-slate-400 stroke-none"
+          }
+          // fill={index < rating ? "gold" : "none"}
         />
       ))}
     </div>
@@ -158,7 +251,7 @@ type PaginationProps = {
 
 function Pagination({ itemsPerPage, onItemsPerPageChange }: PaginationProps) {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between flex-end">
       <div className="flex items-center">
         <p className="text-sm grow-1 whitespace-nowrap hidden sm:block">
           Items per page:

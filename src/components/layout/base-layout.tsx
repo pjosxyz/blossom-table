@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 
 function BaseLayout({ children }: PropsWithChildren) {
   return (
-    <main className="mx-2 sm:container sm:mx-auto max-w-6xl">
+    <main className="mx-2 h-[100dvh] sm:container sm:mx-auto max-w-6xl">
       <Header />
       <div className="mt-10">{children}</div>
     </main>
