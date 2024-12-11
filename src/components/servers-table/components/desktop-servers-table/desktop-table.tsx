@@ -18,6 +18,8 @@ export default function DesktopTable({
   serverNameFilter,
   onServerNameFilterChange,
   onRatingFilterChange,
+  onReviewFilterChange,
+  onResetReviewRatingFilters,
 }: TableProps) {
   return (
     <div className="hidden lg:block">
@@ -26,7 +28,11 @@ export default function DesktopTable({
           onSearchChange={onServerNameFilterChange}
           serverNameFilter={serverNameFilter}
         />
-        <DesktopTableFilters onRatingFilterChange={onRatingFilterChange} />
+        <DesktopTableFilters
+          onRatingFilterChange={onRatingFilterChange}
+          onReviewFilterChange={onReviewFilterChange}
+          onResetReviewRatingFilters={onResetReviewRatingFilters}
+        />
       </div>
       <div className="rounded-xl border border-slate-300 overflow-hidden">
         <Table>

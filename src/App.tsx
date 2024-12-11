@@ -4,7 +4,7 @@ import ServersTable from "@/components/servers-table";
 import mData from "@/data/MOCK_DATA.json";
 import React from "react";
 import { ColumnDef } from "@tanstack/react-table";
-import type { ReviewedBy, ServerData } from "./types";
+import type { ServerData } from "./types";
 import ActionButtons from "./components/servers-table/components/action-buttons";
 import CopyURLButton from "./components/servers-table/components/copy-url-button";
 import StarRating from "./components/star-rating";
@@ -13,6 +13,10 @@ import ServerDetail from "./components/servers-table/components/server-detail";
 function App() {
   const data: ServerData[] = React.useMemo(() => mData, []);
 
+  /**
+   * Any components passed here will only show in the desktop table
+   * (mobile table needs to be updated separately)
+   */
   const columns = React.useMemo<ColumnDef<ServerData>[]>(
     () => [
       {
@@ -31,17 +35,38 @@ function App() {
       {
         accessorKey: "rating",
         header: "Rating",
-        cell: (info) => <StarRating serverRating={info.getValue<number>()} />,
+        cell: (info) => {
+          const reviewedBy = info.row.original.reviewedBy;
+          const numReviews = reviewedBy.length;
+          return (
+            <>
+              <StarRating serverRating={info.getValue<number>()} />
+              <span className="text-sm">
+                {numReviews} review
+                {numReviews > 1 || numReviews === 0 ? "s" : ""}
+              </span>
+            </>
+          );
+        },
         filterFn: (row, _columnId, filterValue: number) => {
-          return row.original.rating <= filterValue;
+          return row.original.rating >= filterValue;
         },
       },
       {
         accessorKey: "reviewedBy",
         header: "Reviewed by",
-        cell: (info) => (
-          <Reviewers reviewedBy={info.getValue<ReviewedBy[]>()} />
-        ),
+        cell: ({ row }) => {
+          const reviewedBy = row.original.reviewedBy;
+          return (
+            <div>
+              <Reviewers reviewedBy={reviewedBy} />
+              <span>({reviewedBy.length})</span>
+            </div>
+          );
+        },
+        filterFn: (row, _columnId, filterValue: number) => {
+          return row.original.reviewedBy.length >= filterValue;
+        },
       },
       {
         accessorKey: "description",

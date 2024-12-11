@@ -1,24 +1,29 @@
 import { Slider } from "@/components/ui/slider";
 import FilterCard from "./filter-card";
-import { useState } from "react";
+// import { useState } from "react";
 
-export default function ReviewsFilter() {
-  const highestNumReviews = 8;
-  const [sliderValue, setSliderValue] = useState<number[]>([
-    highestNumReviews / 2,
-  ]);
+export default function ReviewsFilter({
+  onReviewFilterChange,
+  numReviews,
+}: {
+  onReviewFilterChange: (value: number[]) => void;
+  numReviews: number[];
+}) {
+  const highestNumReviews = 4; // TODO: get from actual array of reviews...
 
   return (
     <FilterCard
       title="Total reviews"
-      info={`${sliderValue} review${sliderValue[0] > 1 || sliderValue[0] === 0 ? "s" : ""}`}
+      info={`${numReviews} review${
+        numReviews[0] > 1 || numReviews[0] === 0 ? "s" : ""
+      } and up`}
     >
       <Slider
         max={highestNumReviews}
-        defaultValue={[highestNumReviews / 2]}
+        defaultValue={numReviews}
         step={1}
-        value={sliderValue}
-        onValueChange={(value) => setSliderValue(value)}
+        value={numReviews}
+        onValueChange={(value) => onReviewFilterChange(value)}
       />
     </FilterCard>
   );

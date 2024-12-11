@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Pagination from "@/components/servers-table/components/pagination";
-import MobileTable from "./components/mobile-servers-table/mobile-table";
+// import MobileTable from "./components/mobile-servers-table/mobile-table";
 import { ServersTableProps } from "./types";
 import { DEFAULT_ITEMS_PER_PAGE } from "@/consts";
 import DesktopTable from "./components/desktop-servers-table/desktop-table";
@@ -46,12 +46,16 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
 
   function handleServerNameFilterChange(value: string) {
     setServerNameFilter(value);
-    setColumnFilters([
-      {
-        id: "serverDetail",
-        value: value,
-      },
-    ]);
+    setColumnFilters((prev) => {
+      const remaining = prev.filter((filter) => filter.id !== "serverDetail");
+      return [
+        ...remaining,
+        {
+          id: "serverDetail",
+          value: value,
+        },
+      ];
+    });
   }
 
   function handleItemsPerPageChange(value: string) {
@@ -64,10 +68,44 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
   }
 
   function handleRatingFilterChange(value: number) {
+    setColumnFilters((prev) => {
+      // Remove old rating filter if exists
+      const remaining = prev.filter((filter) => filter.id !== "rating");
+      // Add new rating filter
+      return [
+        ...remaining,
+        {
+          id: "rating",
+          value: value,
+        },
+      ];
+    });
+  }
+
+  function handleReviewFilterChange(value: number) {
+    setColumnFilters((prev) => {
+      // Remove old review filter if exists
+      const remaining = prev.filter((filter) => filter.id !== "reviewedBy");
+      // Add new review filter
+      return [
+        ...remaining,
+        {
+          id: "reviewedBy",
+          value: value,
+        },
+      ];
+    });
+  }
+
+  function handleResetReviewRatingFilters() {
     setColumnFilters([
       {
         id: "rating",
-        value,
+        value: 0,
+      },
+      {
+        id: "reviewedBy",
+        value: 0,
       },
     ]);
   }
@@ -75,17 +113,19 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
   return (
     // TODO: move to wrap tabs too in App
     <div className="flex flex-col h-[90dvh] gap-4">
-      <MobileTable
+      {/* <MobileTable
         tableData={table}
         serverNameFilter={serverNameFilter}
         onServerNameFilterChange={handleServerNameFilterChange}
         onRatingFilterChange={handleRatingFilterChange}
-        />
+      /> */}
       <DesktopTable
         tableData={table}
         serverNameFilter={serverNameFilter}
         onServerNameFilterChange={handleServerNameFilterChange}
         onRatingFilterChange={handleRatingFilterChange}
+        onReviewFilterChange={handleReviewFilterChange}
+        onResetReviewRatingFilters={handleResetReviewRatingFilters}
       />
       <Pagination
         tableData={table}

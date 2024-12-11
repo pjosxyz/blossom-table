@@ -8,7 +8,7 @@ export default function Reviewers({ reviewedBy }: ReviewersProps) {
         // stop rendering new items if max items already rendered
         if (i > MAX_REVIEWER_USERNAMES) return null;
         return (
-          <div key={i}> {/* TODO: Fix key */}
+          <div key={reviewer.id}> {/* TODO: Fix key */}
             {i ===
             MAX_REVIEWER_USERNAMES /* TODO: make this a popover or link to full reviews view? */ ? (
               <p className="text-slate-500" key={reviewer.id}>

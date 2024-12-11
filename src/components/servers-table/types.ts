@@ -11,6 +11,8 @@ export type TableProps = {
   serverNameFilter: string;
   onServerNameFilterChange: (value: string) => void;
   onRatingFilterChange: (value: number) => void;
+  onReviewFilterChange: (value: number) => void;
+  onResetReviewRatingFilters: () => void;
 };
 
 export type MobileRowProps = Omit<ServerData, "id"> & { key: number };
