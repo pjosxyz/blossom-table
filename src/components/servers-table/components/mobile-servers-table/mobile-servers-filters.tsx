@@ -1,4 +1,3 @@
-import { PropsWithChildren } from "react";
 import { FiltersType } from "../../types";
 import ServerNameSearch from "../server-search";
 import {
@@ -10,12 +9,13 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { SlidersHorizontal } from "lucide-react";
+import RatingFilter from "../rating-filter";
+import ReviewsFilter from "../reviews-filter";
 
 export default function MobileServersTableFilters({
   serverNameFilter,
   onSearchChange,
-  children,
-}: PropsWithChildren<FiltersType>) {
+}: FiltersType) {
   return (
     <div className="flex justify-between px-2 sm:px-4 gap-9">
       <ServerNameSearch
@@ -32,9 +32,9 @@ export default function MobileServersTableFilters({
             <DrawerDescription className="sr-only">
               Filter table results by review score
             </DrawerDescription>
-            {/* drop filter components here */}
-            {children}
           </DrawerHeader>
+          <RatingFilter />
+          <ReviewsFilter />
         </DrawerContent>
       </Drawer>
     </div>

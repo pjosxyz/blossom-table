@@ -14,15 +14,24 @@ import DesktopTable from "./components/desktop-servers-table/desktop-table";
 
 export default function ServersTable({ data, columns }: ServersTableProps) {
   const [serverNameFilter, setServerNameFilter] = React.useState<string>("");
+
   const [itemsPerPage, setItemsPerPage] = React.useState<number>(
     DEFAULT_ITEMS_PER_PAGE
   );
+
+  // const [ratingFilter, setRatingFilter] = React.useState<number>(0);
+
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([
     {
       id: "serverName",
       value: serverNameFilter,
     },
+    // {
+    //   id: "rating",
+    //   value: ratingFilter,
+    // },
   ]);
+
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
     pageSize: itemsPerPage,
@@ -55,6 +64,11 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
       pageSize: numItems,
     }));
   }
+
+  // function handleRatingFilterChange(value: number) {
+  //   setRatingFilter(value);
+  //   // table.getColumn("rating")?.setFilterValue(value);
+  // }
 
   return (
     // TODO: move to wrap tabs too in App

@@ -12,7 +12,6 @@ import Reviewers from "./components/servers-table/components/reviewers";
 function App() {
   const data = React.useMemo(() => mData, []);
 
-  // TODO: need to memoise...
   const columns = React.useMemo<ColumnDef<ServerData>[]>(
     () => [
       {
@@ -48,6 +47,7 @@ function App() {
     ],
     [] // No dependencies since columns definition is static
   );
+  
   return (
     <BaseLayout>
       <Tabs defaultValue="servers" className="w-full">

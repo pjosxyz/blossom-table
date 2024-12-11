@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { TableProps } from "../../types";
-import ServerNameSearch from "../server-search";
+import { flexRender } from "@tanstack/react-table";
 import {
   Table,
   TableBody,
@@ -10,7 +8,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { flexRender } from "@tanstack/react-table";
+
+import { TableProps } from "@/components/servers-table/types";
+import ServerNameSearch from "@/components/servers-table/components/server-search";
+import DesktopTableFilters from "@/components/servers-table/components/desktop-servers-table/desktop-table-filters";
 
 export default function DesktopTable({
   tableData,
@@ -24,7 +25,7 @@ export default function DesktopTable({
           onSearchChange={onServerNameFilterChange}
           serverNameFilter={serverNameFilter}
         />
-        <Button>Filters</Button>
+        <DesktopTableFilters />
       </div>
       <div className="rounded-xl border border-slate-300 overflow-hidden">
         <Table>
