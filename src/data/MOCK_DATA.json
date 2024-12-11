@@ -44,7 +44,7 @@
       "serverName": "CloudNostr",
       "isPaidServer": false
     },
-    "rating": 4.3,
+    "rating": 0,
     "reviewedBy": [
       {
         "id": 301,
@@ -66,7 +66,7 @@
       "serverName": "SecureBlob",
       "isPaidServer": true
     },
-    "rating": 4.9,
+    "rating": 1,
     "reviewedBy": [
       {
         "id": 401,
@@ -83,7 +83,7 @@
       "serverName": "GlobalNostr",
       "isPaidServer": false
     },
-    "rating": 4.1,
+    "rating":3,
     "reviewedBy": [
       {
         "id": 501,
@@ -246,7 +246,7 @@
       "serverName": "NostrVault",
       "isPaidServer": true
     },
-    "rating": 4.7,
+    "rating": 2,
     "reviewedBy": [
       {
         "id": 1401,
@@ -268,7 +268,7 @@
       "serverName": "NostrLite",
       "isPaidServer": false
     },
-    "rating": 4.1,
+    "rating": 3,
     "reviewedBy": [
       {
         "id": 1501,
@@ -285,7 +285,7 @@
       "serverName": "GlobalSecureNostr",
       "isPaidServer": true
     },
-    "rating": 4.9,
+    "rating": 1,
     "reviewedBy": [
       {
         "id": 1601,

@@ -5,8 +5,23 @@ import { Star } from "lucide-react";
 import React from "react";
 import FilterCard from "@/components/servers-table/components/filters/filter-card";
 
-export default function RatingFilter() {
+export default function RatingFilter({
+  onRatingFilterChange,
+}: {
+  onRatingFilterChange: (value: number) => void;
+}) {
   const [selectedRating, setSelectedRating] = React.useState<number>(0);
+
+  function handleSelectedRatingChange(value: number) {
+    if (selectedRating === value) {
+      // deselecting
+      setSelectedRating(-1);
+      onRatingFilterChange(MAX_RATING + 1);
+      return;
+    }
+    setSelectedRating(value);
+    onRatingFilterChange(value);
+  }
 
   const annotation =
     selectedRating < 1
@@ -16,13 +31,16 @@ export default function RatingFilter() {
       : `${selectedRating} and up`;
 
   return (
-    <FilterCard title="by rating" info={annotation}>
+    <FilterCard title="Rating" info={annotation}>
       <div className="flex justify-between">
         {range(1, MAX_RATING + 1).map((num) => (
           <Button
             key={num}
-            className="size-9"
-            onClick={() => setSelectedRating(num)}
+            className={cn(
+              num <= selectedRating ? "border border-slate-400" : "",
+              "size-9"
+            )}
+            onClick={() => handleSelectedRatingChange(num)}
           >
             <Star
               size={20}
@@ -37,4 +55,3 @@ export default function RatingFilter() {
     </FilterCard>
   );
 }
-

@@ -17,9 +17,8 @@ export default function DesktopTable({
   tableData,
   serverNameFilter,
   onServerNameFilterChange,
+  onRatingFilterChange,
 }: TableProps) {
-  console.log(tableData);
-
   return (
     <div className="hidden lg:block">
       <div className="flex items-center justify-between mb-4">
@@ -27,7 +26,7 @@ export default function DesktopTable({
           onSearchChange={onServerNameFilterChange}
           serverNameFilter={serverNameFilter}
         />
-        <DesktopTableFilters />
+        <DesktopTableFilters onRatingFilterChange={onRatingFilterChange} />
       </div>
       <div className="rounded-xl border border-slate-300 overflow-hidden">
         <Table>

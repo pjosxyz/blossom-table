@@ -32,6 +32,9 @@ function App() {
         accessorKey: "rating",
         header: "Rating",
         cell: (info) => <StarRating serverRating={info.getValue<number>()} />,
+        filterFn: (row, _columnId, filterValue: number) => {
+          return row.original.rating <= filterValue;
+        },
       },
       {
         accessorKey: "reviewedBy",

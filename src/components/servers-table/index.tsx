@@ -21,7 +21,9 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
 
   // const [ratingFilter, setRatingFilter] = React.useState<number>(0);
 
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    []
+  );
 
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
@@ -47,8 +49,8 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
     setColumnFilters([
       {
         id: "serverDetail",
-        value: value
-      }
+        value: value,
+      },
     ]);
   }
 
@@ -61,11 +63,15 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
     }));
   }
 
-  // function handleRatingFilterChange(value: number) {
-  //   setRatingFilter(value);
-  //   // table.getColumn("rating")?.setFilterValue(value);
-  // }
-  
+  function handleRatingFilterChange(value: number) {
+    setColumnFilters([
+      {
+        id: "rating",
+        value,
+      },
+    ]);
+  }
+
   return (
     // TODO: move to wrap tabs too in App
     <div className="flex flex-col h-[90dvh] gap-4">
@@ -73,11 +79,13 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
         tableData={table}
         serverNameFilter={serverNameFilter}
         onServerNameFilterChange={handleServerNameFilterChange}
-      />
+        onRatingFilterChange={handleRatingFilterChange}
+        />
       <DesktopTable
         tableData={table}
         serverNameFilter={serverNameFilter}
         onServerNameFilterChange={handleServerNameFilterChange}
+        onRatingFilterChange={handleRatingFilterChange}
       />
       <Pagination
         tableData={table}
