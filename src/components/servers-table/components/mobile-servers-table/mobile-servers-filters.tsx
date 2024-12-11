@@ -9,8 +9,8 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { SlidersHorizontal } from "lucide-react";
-import RatingFilter from "../rating-filter";
-import ReviewsFilter from "../reviews-filter";
+import RatingFilter from "../filters/rating-filter";
+import ReviewsFilter from "../filters/reviews-filter";
 
 export default function MobileServersTableFilters({
   serverNameFilter,

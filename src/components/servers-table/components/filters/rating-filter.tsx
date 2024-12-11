@@ -3,6 +3,7 @@ import { MAX_RATING } from "@/consts";
 import { cn, range } from "@/lib/utils";
 import { Star } from "lucide-react";
 import React from "react";
+import FilterCard from "@/components/servers-table/components/filters/filter-card";
 
 export default function RatingFilter() {
   const [selectedRating, setSelectedRating] = React.useState<number>(0);
@@ -15,14 +16,14 @@ export default function RatingFilter() {
       : `${selectedRating} and up`;
 
   return (
-    <div className="bg-slate-100 p-4 flex flex-col gap-3 rounded">
-      <div className="flex justify-between">
-        <p className="text-sm">By rating</p>
-        <p className="text-sm text-slate-500">{annotation}</p>
-      </div>
+    <FilterCard title="by rating" info={annotation}>
       <div className="flex justify-between">
         {range(1, MAX_RATING + 1).map((num) => (
-          <Button key={num} className="size-9" onClick={() => setSelectedRating(num)}>
+          <Button
+            key={num}
+            className="size-9"
+            onClick={() => setSelectedRating(num)}
+          >
             <Star
               size={20}
               className={cn(
@@ -33,6 +34,7 @@ export default function RatingFilter() {
           </Button>
         ))}
       </div>
-    </div>
+    </FilterCard>
   );
 }
+
