@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ColumnFiltersState,
   getCoreRowModel,
@@ -13,7 +13,7 @@ import { DEFAULT_ITEMS_PER_PAGE } from "@/consts";
 import DesktopTable from "./components/desktop-servers-table/desktop-table";
 
 export default function ServersTable({ data, columns }: ServersTableProps) {
-  const [serverNameFilter, setServerNameFilter] = React.useState<string>("");
+  const [serverNameFilter, setServerNameFilter] = useState<string>("");
 
   const [itemsPerPage, setItemsPerPage] = React.useState<number>(
     DEFAULT_ITEMS_PER_PAGE
@@ -21,16 +21,7 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
 
   // const [ratingFilter, setRatingFilter] = React.useState<number>(0);
 
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([
-    {
-      id: "serverName",
-      value: serverNameFilter,
-    },
-    // {
-    //   id: "rating",
-    //   value: ratingFilter,
-    // },
-  ]);
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
 
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
@@ -53,7 +44,12 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
 
   function handleServerNameFilterChange(value: string) {
     setServerNameFilter(value);
-    table.getColumn("serverName")?.setFilterValue(value);
+    setColumnFilters([
+      {
+        id: "serverDetail",
+        value: value
+      }
+    ]);
   }
 
   function handleItemsPerPageChange(value: string) {
@@ -69,7 +65,7 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
   //   setRatingFilter(value);
   //   // table.getColumn("rating")?.setFilterValue(value);
   // }
-
+  
   return (
     // TODO: move to wrap tabs too in App
     <div className="flex flex-col h-[90dvh] gap-4">

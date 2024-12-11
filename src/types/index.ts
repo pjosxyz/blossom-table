@@ -1,6 +1,6 @@
 export type ServerData = {
   id: number;
-  serverName: string;
+  serverDetail: ServerDetail;
   rating: number;
   reviewedBy: ReviewedBy[];
   description: string;
@@ -11,4 +11,9 @@ export type ReviewedBy = {
   id: number;
   username: string;
   address: string;
+};
+
+type ServerDetail = {
+  serverName: string;
+  isPaidServer: boolean;
 };

@@ -18,6 +18,8 @@ export default function DesktopTable({
   serverNameFilter,
   onServerNameFilterChange,
 }: TableProps) {
+  console.log(tableData);
+
   return (
     <div className="hidden lg:block">
       <div className="flex items-center justify-between mb-4">
@@ -38,7 +40,7 @@ export default function DesktopTable({
                     // first cell doesn't get a border-left
                     className={index > 0 ? "border-l border-slate-300" : ""}
                   >
-                    {/* TableHead children typed as React.Node so wrapped in fragment to keep TS happy */}
+                    {/* TableHead children typed as React.Node so wrapped in fragment */}
                     <>{headers.column.columnDef.header}</>
                   </TableHead>
                 ))}

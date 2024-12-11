@@ -1,5 +1,7 @@
 import StarRating from "@/components/star-rating";
-import { MobileRowProps } from "@/components/servers-table/types";
+import {
+  MobileRowProps,
+} from "@/components/servers-table/types";
 import { PropsWithChildren } from "react";
 import {
   BodyProps,
@@ -8,9 +10,10 @@ import {
 import Reviewers from "@/components/servers-table/components/reviewers";
 import ActionButtons from "../action-buttons";
 import CopyURLButton from "../copy-url-button";
+import ServerDetail from "../server-detail";
 
 function MobileDataCard({
-  serverName,
+  serverDetail,
   rating,
   reviewedBy,
   description,
@@ -18,7 +21,7 @@ function MobileDataCard({
 }: MobileRowProps) {
   return (
     <article className="text-sm border border-slate-300 bg-white shadow-sm rounded-md shrink-0 overflow-hidden">
-      <Header serverName={serverName} rating={rating} />
+      <Header serverDetail={serverDetail} rating={rating} />
       <Body reviewedBy={reviewedBy} description={description} url={url} />
       <Footer />
     </article>
@@ -34,17 +37,16 @@ function Footer() {
 }
 
 function Header({
-  serverName,
+  serverDetail,
   rating,
 }: {
-  serverName: string;
+  serverDetail: { serverName: string; isPaidServer: boolean };
   rating: number;
 }) {
   return (
     <header className=" px-3 py-3 border-b  border-slate-200 flex items-center justify-between">
-      <p className="capitalize text-lg max-w-[60%] leading-tight font-medium text-slate-950">
-        {serverName}
-      </p>
+      <ServerDetail serverDetail={serverDetail} />
+
       <div className="text-xs flex items-center gap-1 text-slate-500">
         <StarRating serverRating={rating} />1 review{" "}
         {/* TODO: Derive from relay data, update ServerData interface */}

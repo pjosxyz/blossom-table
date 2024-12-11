@@ -24,3 +24,7 @@ export type FiltersType = {
   serverNameFilter: string;
   onSearchChange: (value: string) => void;
 };
+
+export type ServerDetailProps = {
+  serverDetail: { serverName: string; isPaidServer: boolean };
+};

@@ -21,7 +21,7 @@ export default function MobileTable({
             return (
               <MobileDataCard
                 key={row.id}
-                serverName={row.serverName}
+                serverDetail={row.serverDetail}
                 rating={row.rating}
                 reviewedBy={row.reviewedBy}
                 description={row.description}

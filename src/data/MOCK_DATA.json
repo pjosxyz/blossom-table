@@ -1,7 +1,10 @@
 [
   {
     "id": 1,
-    "serverName": "Blossom Garden",
+    "serverDetail": {
+      "serverName": "Blossom Garden",
+      "isPaidServer": false
+    },
     "rating": 4.8,
     "reviewedBy": [
       {
@@ -20,303 +23,277 @@
   },
   {
     "id": 2,
-    "serverName": "Nostr Hub",
+    "serverDetail": {
+      "serverName": "NostrBlob Pro",
+      "isPaidServer": true
+    },
     "rating": 4.6,
     "reviewedBy": [
       {
         "id": 201,
-        "username": "zapper_max",
-        "address": "npub1x8jrk3d8vqj58zxvw4j9qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j"
+        "username": "crypto_enthusiast",
+        "address": "npub1qwertyuiop0987654321zxcvbnm12345678901234567890qwertyuiopas"
       }
     ],
-    "description": "Community-focused Blossom server with excellent moderation tools",
-    "url": "blossom.nostrhub.net/"
+    "description": "Premium blob storage with advanced security features and dedicated support",
+    "url": "nostrblobpro.com/"
   },
   {
     "id": 3,
-    "serverName": "Lightning Blossom",
-    "rating": 4.9,
-    "reviewedBy": [
-      {
-        "id": 301,
-        "username": "bitcoin_alice",
-        "address": "npub1y9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr"
-      },
-      {
-        "id": 302,
-        "username": "sats_stacker",
-        "address": "npub1ln8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4"
-      }
-    ],
-    "description": "Lightning-fast Blossom server with integrated Bitcoin payments",
-    "url": "blossom.lightning.space/"
-  },
-  {
-    "id": 4,
-    "serverName": "Decentralized Petals",
-    "rating": 4.5,
-    "reviewedBy": [
-      {
-        "id": 401,
-        "username": "nostr_wanderer",
-        "address": "npub1wanderer9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x"
-      }
-    ],
-    "description": "Privacy-focused Blossom server with enhanced security features",
-    "url": "blossom.decent.world/"
-  },
-  {
-    "id": 5,
-    "serverName": "Orange Pill",
-    "rating": 4.7,
-    "reviewedBy": [
-      {
-        "id": 501,
-        "username": "bitcoin_maximalist",
-        "address": "npub1max9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
-      }
-    ],
-    "description": "Bitcoin-centric Blossom server with active development community",
-    "url": "blossom.orangepill.io/"
-  },
-  {
-    "id": 6,
-    "serverName": "Zap Zone",
-    "rating": 4.4,
-    "reviewedBy": [
-      {
-        "id": 601,
-        "username": "lightning_lover",
-        "address": "npub1zap9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
-      },
-      {
-        "id": 602,
-        "username": "nostr_pioneer",
-        "address": "npub1pioneer4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
-      }
-    ],
-    "description": "Zap-friendly Blossom server optimized for micropayments",
-    "url": "blossom.zapzone.net/"
-  },
-  {
-    "id": 7,
-    "serverName": "Sovereign Stack",
-    "rating": 4.8,
-    "reviewedBy": [
-      {
-        "id": 701,
-        "username": "self_custody",
-        "address": "npub1sovereign9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4q"
-      }
-    ],
-    "description": "Self-hosted Blossom server solution with extensive documentation",
-    "url": "blossom.sovereign.tech/"
-  },
-  {
-    "id": 8,
-    "serverName": "Purple Garden",
+    "serverDetail": {
+      "serverName": "CloudNostr",
+      "isPaidServer": false
+    },
     "rating": 4.3,
     "reviewedBy": [
       {
-        "id": 801,
-        "username": "nostr_artist",
-        "address": "npub1purple9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
-      }
-    ],
-    "description": "Art-focused Blossom server with NFT integration",
-    "url": "blossom.purple.art/"
-  },
-  {
-    "id": 9,
-    "serverName": "Global Relay",
-    "rating": 4.6,
-    "reviewedBy": [
-      {
-        "id": 901,
-        "username": "relay_runner",
-        "address": "npub1relay9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
+        "id": 301,
+        "username": "blockchain_user",
+        "address": "npub1zxcvbnm0987654321qwertyuiop1234567890asdfghjklzxcvbnmqwerty"
       },
       {
-        "id": 902,
-        "username": "nostr_global",
-        "address": "npub1global9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
+        "id": 302,
+        "username": "web3_explorer",
+        "address": "npub1asdfghjkl0987654321zxcvbnm12345678901234567890qwertyuiopqwe"
       }
     ],
-    "description": "Globally distributed Blossom server network with low latency",
-    "url": "blossom.relay.global/"
+    "description": "Free and open-source blob storage relay with community-driven infrastructure",
+    "url": "cloudnostr.xyz/"
   },
   {
-    "id": 10,
-    "serverName": "Freedom Node",
-    "rating": 4.7,
-    "reviewedBy": [
-      {
-        "id": 1001,
-        "username": "privacy_first",
-        "address": "npub1freedom9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
-      }
-    ],
-    "description": "Privacy-preserving Blossom server with Tor support",
-    "url": "blossom.freedom.network/"
-  },
-  {
-    "id": 11,
-    "serverName": "Alpine Relay",
-    "rating": 4.5,
-    "reviewedBy": [
-      {
-        "id": 1101,
-        "username": "swiss_stacker",
-        "address": "npub1alpine9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
-      },
-      {
-        "id": 1102,
-        "username": "mountain_node",
-        "address": "npub1mount9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
-      }
-    ],
-    "description": "Swiss-based Blossom server with guaranteed uptime and privacy focus",
-    "url": "blossom.alpine.swiss/"
-  },
-  {
-    "id": 12,
-    "serverName": "Pleb Lab",
-    "rating": 4.8,
-    "reviewedBy": [
-      {
-        "id": 1201,
-        "username": "pleb_stacker",
-        "address": "npub1pleb99x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
-      }
-    ],
-    "description": "Community-driven Blossom server with educational resources",
-    "url": "blossom.pleblab.org/"
-  },
-  {
-    "id": 13,
-    "serverName": "Samurai Node",
+    "id": 4,
+    "serverDetail": {
+      "serverName": "SecureBlob",
+      "isPaidServer": true
+    },
     "rating": 4.9,
     "reviewedBy": [
       {
-        "id": 1301,
-        "username": "tokyo_bitcoiner",
-        "address": "npub1samurai4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
+        "id": 401,
+        "username": "privacy_ninja",
+        "address": "npub1qazwsxedc0987654321rfvtgbyhnujmikolp0987654321qazwsxedcrfv"
       }
     ],
-    "description": "Japan-based Blossom server with lightning-fast response times",
-    "url": "blossom.samurai.jp/"
+    "description": "Military-grade encrypted blob storage with zero-knowledge architecture",
+    "url": "secureblob.net/"
   },
   {
-    "id": 14,
-    "serverName": "Arctic Vault",
-    "rating": 4.6,
+    "id": 5,
+    "serverDetail": {
+      "serverName": "GlobalNostr",
+      "isPaidServer": false
+    },
+    "rating": 4.1,
     "reviewedBy": [
       {
-        "id": 1401,
-        "username": "cold_storage",
-        "address": "npub1arctic9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
-      },
-      {
-        "id": 1402,
-        "username": "nordic_node",
-        "address": "npub1nordic9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
+        "id": 501,
+        "username": "decentralization_fan",
+        "address": "npub1mnbvcxz0987654321qwertyuiop1234567890asdfghjklmnbvcxzqwerty"
       }
     ],
-    "description": "Nordic Blossom server with redundant backup systems",
-    "url": "blossom.arctic.no/"
+    "description": "Distributed blob storage with global node network and low latency",
+    "url": "globalnostr.io/"
   },
   {
-    "id": 15,
-    "serverName": "Desert Oasis",
+    "id": 6,
+    "serverDetail": {
+      "serverName": "NostrArchive",
+      "isPaidServer": true
+    },
     "rating": 4.7,
     "reviewedBy": [
       {
-        "id": 1501,
-        "username": "sahara_relay",
-        "address": "npub1oasis9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
+        "id": 601,
+        "username": "data_historian",
+        "address": "npub1poiuytrewq0987654321lkjhgfdsamnbvcxz1234567890qwertyuioplkj"
+      },
+      {
+        "id": 602,
+        "username": "preservation_expert",
+        "address": "npub1lkjhgfds0987654321zxcvbnm12345678901234567890qwertyuiopaslkj"
       }
     ],
-    "description": "Middle East-based Blossom server with excellent regional connectivity",
-    "url": "blossom.oasis.ae/"
+    "description": "Long-term blob storage with historical data preservation and archival features",
+    "url": "nostrarchive.com/"
   },
   {
-    "id": 16,
-    "serverName": "Atlantis Hub",
+    "id": 7,
+    "serverDetail": {
+      "serverName": "QuickBlob",
+      "isPaidServer": false
+    },
     "rating": 4.4,
     "reviewedBy": [
       {
-        "id": 1601,
-        "username": "ocean_node",
-        "address": "npub1atlantis4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
+        "id": 701,
+        "username": "speed_demon",
+        "address": "npub1zxcvbnm1234567890qwertyuiop0987654321asdfghjklzxcvbnmqwerty"
       }
     ],
-    "description": "Maritime-themed Blossom server with distributed backup systems",
-    "url": "blossom.atlantis.net/"
+    "description": "Lightweight and fast blob storage with minimal overhead and quick uploads",
+    "url": "quickblob.xyz/"
   },
   {
-    "id": 17,
-    "serverName": "Quantum Leaf",
-    "rating": 4.8,
-    "reviewedBy": [
-      {
-        "id": 1701,
-        "username": "quantum_dev",
-        "address": "npub1quantum4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
-      },
-      {
-        "id": 1702,
-        "username": "future_node",
-        "address": "npub1future9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
-      }
-    ],
-    "description": "Next-gen Blossom server with advanced cryptographic features",
-    "url": "blossom.quantum.tech/"
-  },
-  {
-    "id": 18,
-    "serverName": "Emerald Isle",
+    "id": 8,
+    "serverDetail": {
+      "serverName": "NostrCloud Elite",
+      "isPaidServer": true
+    },
     "rating": 4.5,
     "reviewedBy": [
       {
-        "id": 1801,
-        "username": "irish_bitcoiner",
-        "address": "npub1emerald4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
+        "id": 801,
+        "username": "enterprise_user",
+        "address": "npub1qwertyuiop1234567890zxcvbnm0987654321asdfghjklqwertyuiopzxc"
       }
     ],
-    "description": "Ireland-based Blossom server with GDPR compliance",
-    "url": "blossom.emerald.ie/"
+    "description": "Enterprise-grade blob storage with advanced compliance and data management",
+    "url": "nostrcloudelit.com/"
   },
   {
-    "id": 19,
-    "serverName": "Maple Leaf",
+    "id": 9,
+    "serverDetail": {
+      "serverName": "CommunityNostr",
+      "isPaidServer": false
+    },
+    "rating": 4.2,
+    "reviewedBy": [
+      {
+        "id": 901,
+        "username": "open_source_advocate",
+        "address": "npub1asdfghjkl1234567890zxcvbnm0987654321qwertyuiopasdfghjklzxcv"
+      }
+    ],
+    "description": "Community-driven blob storage platform with collaborative development",
+    "url": "communitynostr.org/"
+  },
+  {
+    "id": 10,
+    "serverDetail": {
+      "serverName": "SecureArchive Pro",
+      "isPaidServer": true
+    },
+    "rating": 4.8,
+    "reviewedBy": [
+      {
+        "id": 1001,
+        "username": "compliance_officer",
+        "address": "npub1zxcvbnm2345678901qwertyuiop9876543210asdfghjklzxcvbnmqwert"
+      },
+      {
+        "id": 1002,
+        "username": "data_guardian",
+        "address": "npub1qwertyuiop2345678901zxcvbnm9876543210asdfghjklqwertyuiopxcv"
+      }
+    ],
+    "description": "High-security blob storage with regulatory compliance and advanced encryption",
+    "url": "securearchivepro.net/"
+  },
+  {
+    "id": 11,
+    "serverDetail": {
+      "serverName": "EcoNostr",
+      "isPaidServer": false
+    },
+    "rating": 4.0,
+    "reviewedBy": [
+      {
+        "id": 1101,
+        "username": "green_tech_lover",
+        "address": "npub1lkjhgfds2345678901zxcvbnm9876543210qwertyuiopaslkjhgfdszxcv"
+      }
+    ],
+    "description": "Environmentally friendly blob storage using renewable energy infrastructure",
+    "url": "econostr.green/"
+  },
+  {
+    "id": 12,
+    "serverDetail": {
+      "serverName": "NostrEdge",
+      "isPaidServer": true
+    },
     "rating": 4.6,
     "reviewedBy": [
       {
-        "id": 1901,
-        "username": "canadian_orange",
-        "address": "npub1maple9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
-      },
-      {
-        "id": 1902,
-        "username": "north_node",
-        "address": "npub1north9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
+        "id": 1201,
+        "username": "tech_innovator",
+        "address": "npub1qazwsxedc2345678901rfvtgbyhnujmikolp9876543210qazwsxedcrfv"
       }
     ],
-    "description": "Canadian Blossom server with cold-weather optimization",
-    "url": "blossom.maple.ca/"
+    "description": "Edge computing-powered blob storage with low-latency global distribution",
+    "url": "nostredge.cloud/"
   },
   {
-    "id": 20,
-    "serverName": "Outback Relay",
+    "id": 13,
+    "serverDetail": {
+      "serverName": "OpenNostr",
+      "isPaidServer": false
+    },
+    "rating": 4.3,
+    "reviewedBy": [
+      {
+        "id": 1301,
+        "username": "decentralization_maximalist",
+        "address": "npub1mnbvcxz2345678901qwertyuiop9876543210asdfghjklmnbvcxzqwerty"
+      }
+    ],
+    "description": "Fully open-source and transparent blob storage with community governance",
+    "url": "opennostr.io/"
+  },
+  {
+    "id": 14,
+    "serverDetail": {
+      "serverName": "NostrVault",
+      "isPaidServer": true
+    },
     "rating": 4.7,
     "reviewedBy": [
       {
-        "id": 2001,
-        "username": "aussie_stack",
-        "address": "npub1outback4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4n8v4qr9j9x4qr9j"
+        "id": 1401,
+        "username": "security_researcher",
+        "address": "npub1poiuytrewq2345678901lkjhgfdsamnbvcxz9876543210qwertyuioplkj"
+      },
+      {
+        "id": 1402,
+        "username": "cryptography_expert",
+        "address": "npub1lkjhgfds2345678901zxcvbnm9876543210qwertyuiopaslkjhgfdszxcv"
       }
     ],
-    "description": "Australian Blossom server with high-speed oceanic connections",
-    "url": "blossom.outback.au/"
+    "description": "High-security blob storage with advanced cryptographic protection and key management",
+    "url": "nostrvault.security/"
+  },
+  {
+    "id": 15,
+    "serverDetail": {
+      "serverName": "NostrLite",
+      "isPaidServer": false
+    },
+    "rating": 4.1,
+    "reviewedBy": [
+      {
+        "id": 1501,
+        "username": "minimalist_user",
+        "address": "npub1zxcvbnm3456789012qwertyuiop8765432109asdfghjklzxcvbnmqwerty"
+      }
+    ],
+    "description": "Lightweight and minimalist blob storage solution for resource-constrained environments",
+    "url": "nostrlit.xyz/"
+  },
+  {
+    "id": 16,
+    "serverDetail": {
+      "serverName": "GlobalSecureNostr",
+      "isPaidServer": true
+    },
+    "rating": 4.9,
+    "reviewedBy": [
+      {
+        "id": 1601,
+        "username": "international_user",
+        "address": "npub1qwertyuiop3456789012zxcvbnm8765432109asdfghjklqwertyuiopxcv"
+      }
+    ],
+    "description": "Global enterprise-grade blob storage with multi-region redundancy and compliance",
+    "url": "globalsecurenostr.com/"
   }
 ]

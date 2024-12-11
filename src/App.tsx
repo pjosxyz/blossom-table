@@ -9,14 +9,24 @@ import ActionButtons from "./components/servers-table/components/action-buttons"
 import CopyURLButton from "./components/servers-table/components/copy-url-button";
 import StarRating from "./components/star-rating";
 import Reviewers from "./components/servers-table/components/reviewers";
+import ServerDetail from "./components/servers-table/components/server-detail";
 function App() {
-  const data = React.useMemo(() => mData, []);
+  const data: ServerData[] = React.useMemo(() => mData, []);
 
   const columns = React.useMemo<ColumnDef<ServerData>[]>(
     () => [
       {
-        accessorKey: "serverName",
+        accessorKey: "serverDetail",
         header: "Server Name",
+        cell: ({ row }) => {
+          const serverDetail = row.original.serverDetail;
+          return <ServerDetail serverDetail={serverDetail} />;
+        },
+        filterFn: (row, _columnId, filterValue: string) => {
+          return row.original.serverDetail.serverName
+            .toLowerCase()
+            .includes(filterValue.toLowerCase());
+        },
       },
       {
         accessorKey: "rating",
@@ -45,9 +55,9 @@ function App() {
         cell: () => <ActionButtons />,
       },
     ],
-    [] // No dependencies since columns definition is static
+    []
   );
-  
+
   return (
     <BaseLayout>
       <Tabs defaultValue="servers" className="w-full">
