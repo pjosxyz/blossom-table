@@ -7,10 +7,10 @@ import {
   useReactTable,
 } from "@tanstack/react-table";
 import Pagination from "@/components/servers-table/components/pagination";
-// import MobileTable from "./components/mobile-servers-table/mobile-table";
 import { ServersTableProps } from "./types";
 import { DEFAULT_ITEMS_PER_PAGE } from "@/consts";
-import DesktopTable from "./components/desktop-servers-table/desktop-table";
+import DesktopTable from "@/components/servers-table/components/desktop-servers-table/desktop-table";
+import MobileTable from "@/components/servers-table/components/mobile-servers-table/mobile-table";
 
 export default function ServersTable({ data, columns }: ServersTableProps) {
   const [serverNameFilter, setServerNameFilter] = useState<string>("");
@@ -18,8 +18,6 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
   const [itemsPerPage, setItemsPerPage] = React.useState<number>(
     DEFAULT_ITEMS_PER_PAGE
   );
-
-  // const [ratingFilter, setRatingFilter] = React.useState<number>(0);
 
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -113,12 +111,14 @@ export default function ServersTable({ data, columns }: ServersTableProps) {
   return (
     // TODO: move to wrap tabs too in App
     <div className="flex flex-col h-[90dvh] gap-4">
-      {/* <MobileTable
+      <MobileTable
         tableData={table}
         serverNameFilter={serverNameFilter}
         onServerNameFilterChange={handleServerNameFilterChange}
         onRatingFilterChange={handleRatingFilterChange}
-      /> */}
+        onReviewFilterChange={handleReviewFilterChange}
+        onResetReviewRatingFilters={handleResetReviewRatingFilters}
+      />
       <DesktopTable
         tableData={table}
         serverNameFilter={serverNameFilter}
