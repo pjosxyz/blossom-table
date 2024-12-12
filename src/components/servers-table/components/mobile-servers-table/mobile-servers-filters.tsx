@@ -1,5 +1,4 @@
-import { FiltersType } from "../../types";
-import ServerNameSearch from "../server-search";
+import ServerNameSearch from "../filters/server-search";
 import {
   Drawer,
   DrawerContent,
@@ -12,15 +11,10 @@ import { SlidersHorizontal } from "lucide-react";
 import RatingFilter from "../filters/rating-filter";
 import ReviewsFilter from "../filters/reviews-filter";
 
-export default function MobileServersTableFilters({
-  serverNameFilter,
-  onSearchChange,
-}: FiltersType) {
+export default function MobileServersTableFilters() {
   return (
     <div className="flex justify-between px-2 sm:px-4 gap-9">
       <ServerNameSearch
-        serverNameFilter={serverNameFilter}
-        onSearchChange={onSearchChange}
       />
       <Drawer>
         <DrawerTrigger className="bg-white rounded-lg flex gap-1 items-center min-h-10 border border-slate-300 shadow-sm px-3 px-1-5">

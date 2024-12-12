@@ -6,37 +6,14 @@ import {
 import RatingFilter from "@/components/servers-table/components/filters/rating-filter";
 import ReviewsFilter from "../filters/reviews-filter";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useTable } from "../../hooks/use-table";
 
-export default function DesktopTableFilters({
-  onRatingFilterChange,
-  onReviewFilterChange,
-  onResetReviewRatingFilters,
-}: {
-  onRatingFilterChange: (value: number) => void;
-  onReviewFilterChange: (value: number) => void;
-  onResetReviewRatingFilters: () => void;
-}) {
-  const [ratingValue, setRatingValue] = useState<number>(0);
-  const [reviewSliderValue, setReviewSliderValue] = useState<number[]>([0]);
-
-  const disableResetButton = ratingValue === 0 && reviewSliderValue[0] === 0;
-
-  function handleRatingValueChange(value: number) {
-    setRatingValue(value);
-    onRatingFilterChange(value);
-  }
-
-  function handleReviewSliderValueChange(value: number[]) {
-    const [num] = value;
-    setReviewSliderValue(value);
-    onReviewFilterChange(num);
-  }
+export default function DesktopTableFilters() {
+  const { handleResetReviewRatingFilters, rating, numReviews } = useTable();
+  const disableResetButton = rating === 0 && numReviews[0] === 0;
 
   function handleResetFilters() {
-    setRatingValue(0);
-    setReviewSliderValue([0]);
-    onResetReviewRatingFilters();
+    handleResetReviewRatingFilters();
   }
 
   return (
@@ -45,14 +22,8 @@ export default function DesktopTableFilters({
         <Button>Filters</Button>
       </PopoverTrigger>
       <PopoverContent className="flex flex-col" align="end">
-        <RatingFilter
-          onRatingFilterChange={handleRatingValueChange}
-          rating={ratingValue}
-        />
-        <ReviewsFilter
-          onReviewFilterChange={handleReviewSliderValueChange}
-          numReviews={reviewSliderValue}
-        />
+        <RatingFilter />
+        <ReviewsFilter />
         <div className="p-3 flex ">
           <Button
             variant="primary"

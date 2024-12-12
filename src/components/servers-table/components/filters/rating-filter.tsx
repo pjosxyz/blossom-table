@@ -3,14 +3,10 @@ import { MAX_RATING } from "@/consts";
 import { cn, range } from "@/lib/utils";
 import { Star } from "lucide-react";
 import FilterCard from "@/components/servers-table/components/filters/filter-card";
+import { useTable } from "../../hooks/use-table";
 
-export default function RatingFilter({
-  onRatingFilterChange,
-  rating,
-}: {
-  onRatingFilterChange: (value: number) => void;
-  rating: number;
-}) {
+export default function RatingFilter() {
+  const { handleRatingFilterChange, rating } = useTable();
   const annotation =
     rating < 1
       ? "None selected"
@@ -28,7 +24,7 @@ export default function RatingFilter({
               num <= rating ? "border border-slate-400" : "",
               "size-9"
             )}
-            onClick={() => onRatingFilterChange(num)}
+            onClick={() => handleRatingFilterChange(num)}
           >
             <Star
               size={20}

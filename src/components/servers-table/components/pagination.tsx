@@ -1,15 +1,16 @@
-import { PaginationProps } from "@/components/servers-table/types"
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useTable } from "../hooks/use-table";
 
-function Pagination({ tableData, itemsPerPage, onItemsPerPageChange }: PaginationProps) {
+function Pagination() {
+const {table, handleItemsPerPageChange, itemsPerPage } = useTable()
   return (
     <div className="flex justify-between flex-end px-2 sm:px-4 lg:px-0">
       <div className="flex items-center gap-2">
         <p className="text-sm grow-1 text-slate-600 whitespace-nowrap hidden sm:block">
           Items per page:
         </p>
-        <Select onValueChange={onItemsPerPageChange}>
+        <Select onValueChange={handleItemsPerPageChange}>
           <SelectTrigger className="self-start">
             <SelectValue placeholder={itemsPerPage} />
           </SelectTrigger>
@@ -21,20 +22,20 @@ function Pagination({ tableData, itemsPerPage, onItemsPerPageChange }: Paginatio
         </Select>
       </div>
       <div className="flex gap-1">
-        <Button onClick={() => tableData.setPageIndex(0)}>First</Button>
+        <Button onClick={() => table.setPageIndex(0)}>First</Button>
         <Button
-          onClick={() => tableData.previousPage()}
-          disabled={!tableData.getCanPreviousPage()}
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
         >
           Previous
         </Button>
         <Button
-          onClick={() => tableData.nextPage()}
-          disabled={!tableData.getCanNextPage()}
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
         >
           Next
         </Button>
-        <Button onClick={() => tableData.setPageIndex(tableData.getPageCount() - 1)}>
+        <Button onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
           Last
         </Button>
       </div>

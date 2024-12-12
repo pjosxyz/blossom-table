@@ -9,35 +9,22 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-import { TableProps } from "@/components/servers-table/types";
-import ServerNameSearch from "@/components/servers-table/components/server-search";
+import ServerNameSearch from "@/components/servers-table/components/filters/server-search";
 import DesktopTableFilters from "@/components/servers-table/components/desktop-servers-table/desktop-table-filters";
+import { useTable } from "../../hooks/use-table";
 
-export default function DesktopTable({
-  tableData,
-  serverNameFilter,
-  onServerNameFilterChange,
-  onRatingFilterChange,
-  onReviewFilterChange,
-  onResetReviewRatingFilters,
-}: TableProps) {
+export default function DesktopTable() {
+  const { table } = useTable();
   return (
     <div className="hidden lg:block">
       <div className="flex items-center justify-between mb-4">
-        <ServerNameSearch
-          onSearchChange={onServerNameFilterChange}
-          serverNameFilter={serverNameFilter}
-        />
-        <DesktopTableFilters
-          onRatingFilterChange={onRatingFilterChange}
-          onReviewFilterChange={onReviewFilterChange}
-          onResetReviewRatingFilters={onResetReviewRatingFilters}
-        />
+        <ServerNameSearch />
+        <DesktopTableFilters />
       </div>
       <div className="rounded-xl border border-slate-300 overflow-hidden">
         <Table>
           <TableHeader className="bg-slate-50">
-            {tableData.getHeaderGroups().map((headerGroup) => (
+            {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((headers, index) => (
                   <TableHead
@@ -53,7 +40,7 @@ export default function DesktopTable({
             ))}
           </TableHeader>
           <TableBody>
-            {tableData.getRowModel().rows.map((row) => (
+            {table.getRowModel().rows.map((row) => (
               <TableRow key={row.id}>
                 {row.getVisibleCells().map((cell, index) => (
                   <TableCell

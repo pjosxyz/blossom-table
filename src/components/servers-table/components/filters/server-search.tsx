@@ -1,16 +1,14 @@
 import { Input } from "@/components/ui/input";
-import { FiltersType } from "@/components/servers-table/types";
+import { useTable } from "../../hooks/use-table";
 
-export default function ServerNameSearch({
-  serverNameFilter,
-  onSearchChange,
-}: FiltersType) {
+export default function ServerNameSearch() {
+  const { serverNameFilter, handleServerNameFilterChange } = useTable();
   return (
     <Input
       placeholder="Filter by server name"
       className="max-w-96 border border-slate-300"
       value={serverNameFilter}
-      onChange={(e) => onSearchChange(e.target.value)}
+      onChange={(e) => handleServerNameFilterChange(e.target.value)}
       // onChange={(e) => console.log(e.target.value)}
     />
   );

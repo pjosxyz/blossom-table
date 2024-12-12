@@ -1,14 +1,10 @@
 import { Slider } from "@/components/ui/slider";
 import FilterCard from "./filter-card";
+import { useTable } from "../../hooks/use-table";
 // import { useState } from "react";
 
-export default function ReviewsFilter({
-  onReviewFilterChange,
-  numReviews,
-}: {
-  onReviewFilterChange: (value: number[]) => void;
-  numReviews: number[];
-}) {
+export default function ReviewsFilter() {
+  const {numReviews, handleReviewFilterChange} = useTable()
   const highestNumReviews = 4; // TODO: get from actual array of reviews...
 
   return (
@@ -23,7 +19,7 @@ export default function ReviewsFilter({
         defaultValue={numReviews}
         step={1}
         value={numReviews}
-        onValueChange={(value) => onReviewFilterChange(value)}
+        onValueChange={(value) => handleReviewFilterChange(value)} 
       />
     </FilterCard>
   );
